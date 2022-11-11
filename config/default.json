@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://tan123:tan123@devconnector.gvthzjz.mongodb.net/?retryWrites=true&w=majority",
-  "jwttoken": "mysecrettoken"
+  "jwttoken": "mysecrettoken",
+  "githubClientId": "3cf83c4f03a1e7502529",
+  "githubSecret": "3f8c60993b38f1419915bbf30805a8ac24e3f22e"
 }

@@ -1,16 +1,17 @@
+// use express.
 const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
-// bring in.
-const { check, validationResult } = require('express-validator');
-// bring in bcrypt.
-const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 
 const config = require('config');
+// bring in express validator.
+const { check, validationResult } = require('express-validator');
+// bring in bcrypt.
+const bcrypt = require('bcryptjs');
 
-//have to bring in user module.
+//have to bring in user model.
 const User = require('../../models/User');
 
 //@route GET api/users is endpiont.
@@ -19,7 +20,7 @@ const User = require('../../models/User');
 // router.get('/', (req, res) => res.send('User route'));
 
 //@route   POST api/users is endpiont.
-//@desc    Register user.
+//@desc    To Register  a user.
 //@access   public.
 router.post(
   '/',
@@ -37,6 +38,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       // get validation errors as response. if any of the check fails then error.
+      // make the error visible.
       return res.status(400).json({ errors: errors.array() });
     }
 
@@ -45,15 +47,16 @@ router.post(
     // destructure pull out few things.
     const { name, email, password } = req.body;
 
+    // add logic to register user.
     try {
       // see if the user exists
-      // iwth mongoose. // takes in a field to search by.
+      // iwth mongoose. // takes in a field to search by // returns promise.
       let user = await User.findOne({ email: email });
       if (user) {
         // user exists. then error multiple users with same email.
         return res
           .status(400)
-          .json({ errors: [{ msg: 'User already exists.' }] }); // bad request. to get same type of error as input error.
+          .json({ errors: [{ msg: 'User already exists.' }] }); // bad request. to get same type of error as input error. so array with object.
       }
 
       //get users gravatar based on their email and put that.
@@ -77,17 +80,20 @@ router.post(
         password,
       });
 
-      // encrypt password using decrypt.
+      //before saving, encrypt password using decrypt.
 
       // return json web token.
       // to be logged in you have to have to have that token.
       // we get a promise. 10 recommended.
+      // create a salt first to do hashing.
       const salt = await bcrypt.genSalt(10);
 
       // take password and hash it.
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
+
+      // Return jsonwebtoken.
       // after save we get the id.
       //create our payload.
       const payload = {
@@ -96,7 +102,10 @@ router.post(
         },
       };
 
-      // secret present in default.json.
+      // jwttoken present in default.json inside config.
+      // we sign the token.  pass in the payload, secret and expiration is optional
+      // and then inside callback either error or token. if not error send token to client.
+
       jwt.sign(
         payload,
         config.get('jwttoken'),
@@ -106,13 +115,14 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
+          //else.
           res.json({ token });
         }
       );
 
       //   res.send('User registered');
     } catch (err) {
-      // if wrong then server error.
+      // if sth wrong then server error.
       console.error(err.message);
       res.status(500).send('Server error');
     }

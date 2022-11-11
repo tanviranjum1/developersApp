@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// create schema.
+// create schema to hold different fields.
 const userSchema = new mongoose.Schema({
   //takes object will fields
   name: {
