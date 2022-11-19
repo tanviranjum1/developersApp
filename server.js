@@ -30,7 +30,7 @@ app.use('/api/posts', require('./routes/api/posts'));
 // look at environment variables called port.
 // when we deploy to heroku that's where it will get port number.
 // if not deployed to heroku then locally default it to port number 5000.
-const PORT = process.env.PORT || 9500;
+const PORT = process.env.PORT || 8000;
 
 // use app variable to listen on a port.
 app.listen(PORT, () => {

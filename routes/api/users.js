@@ -14,6 +14,9 @@ const bcrypt = require('bcryptjs');
 //have to bring in user model.
 const User = require('../../models/User');
 
+var cors = require('cors');
+router.use(cors());
+
 //@route GET api/users is endpiont.
 //@desc Test route.
 //@access public. so doesn't need token. will make that happen by auth middleware.

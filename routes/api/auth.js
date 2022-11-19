@@ -13,9 +13,12 @@ const config = require('config');
 // bring in express validator.
 const { check, validationResult } = require('express-validator');
 
+var cors = require('cors');
+router.use(cors());
+
 //@route GET api/auth is endpiont.
 //@desc Test route.
-//@access public. so doesn't need token. will make that happen by auth middleware.
+//@access private. so doesn't need token. will make that happen by auth middleware.
 // add middleware as second parameter. will make this rotue protected.
 // we want the route to return user data.
 router.get('/', auth, async (req, res) => {
