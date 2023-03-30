@@ -1,34 +1,11 @@
 // bring express
 const express = require("express");
-const mongoose = require("mongoose");
-const db =
-  "mongodb+srv://DeathStar:IiCMwVZqlfkbEQUS@cluster0.ttq28tg.mongodb.net/devConnector?retryWrites=true&w=majority";
 
 // bring the mongodb connection.
-// const connectDB = require("./config/db");
+const connectDB = require("./config/db");
 
 //initialize app variable with express.
 const app = express();
-
-// Connect Database. //after initilization to express. connect to db.
-
-const connectDB = async () => {
-  // try catch if it fails get erro message.
-  try {
-    // this returns a promise so await.
-    await mongoose.connect(db, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    });
-
-    console.log("MongoDB Connected...");
-  } catch (err) {
-    console.error(err.message);
-    // Exit process with failure
-    process.exit(1);
-  }
-};
 
 connectDB();
 

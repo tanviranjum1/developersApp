@@ -1,4 +1,5 @@
 {
+  "mongoURI": "mongodb+srv://DeathStar:IiCMwVZqlfkbEQUS@cluster0.ttq28tg.mongodb.net/devConnector?retryWrites=true&w=majority",
   "jwtSecret": "mysecrettoken",
   "githubClientId": "3cf83c4f03a1e7502529",
   "githubSecret": "3f8c60993b38f1419915bbf30805a8ac24e3f22e"
