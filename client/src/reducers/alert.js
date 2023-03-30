@@ -1,6 +1,6 @@
 // fucntion that takes in piece of state.
 
-import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
+import { SET_ALERT, REMOVE_ALERT } from "../actions/types";
 
 // action will be dispatched from action file.
 
@@ -12,7 +12,7 @@ const initialState = [];
 
 // set_alert to add a new alert to the array. returns array with the alert and the new alert.
 // remove a specific alert by it's id.
-export default function alert(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {

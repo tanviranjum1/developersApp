@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // create schema to hold different fields.
-const userSchema = new mongoose.Schema({
-  //takes object will fields
+const UserSchema = new mongoose.Schema({
+  //takes object with fields
   name: {
     type: String,
     required: true,
@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema({
     // so we don't have two people registered with same email
     unique: true,
   },
-
   password: {
     type: String,
     required: true,
@@ -26,9 +25,8 @@ const userSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now, // current date and time.
+    default: Date.now,
   },
 });
-
 // takes in model name and  schema.
-module.exports = User = mongoose.model('user', userSchema);
+module.exports = User = mongoose.model("user", UserSchema);

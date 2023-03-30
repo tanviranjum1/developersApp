@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ProfileSchema = new mongoose.Schema({
   // create a reference to user model.
@@ -6,7 +6,7 @@ const ProfileSchema = new mongoose.Schema({
   user: {
     // object id. so we can connect to id which is in user model
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: "user",
   },
   company: {
     type: String,
@@ -22,8 +22,6 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  //   will be array of strings. in ui they will add as comma seperated value.
-  // will use js to turn it to array and put it in db.
   skills: {
     type: [String],
     required: true,
@@ -32,11 +30,10 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
   },
   //   github user name if they want to show their latest repositories.
-  // so will be working iwt github api.
+  // so will be working with github api.
   githubusername: {
     type: String,
   },
-  //   paste in field called experience which is array of other fields.
   experience: [
     {
       title: {
@@ -57,7 +54,6 @@ const ProfileSchema = new mongoose.Schema({
       to: {
         type: Date,
       },
-      //   if currently employed in a company then it will disable the to field.
       current: {
         type: Boolean,
         default: false,
@@ -67,7 +63,6 @@ const ProfileSchema = new mongoose.Schema({
       },
     },
   ],
-
   education: [
     {
       school: {
@@ -89,6 +84,7 @@ const ProfileSchema = new mongoose.Schema({
       to: {
         type: Date,
       },
+      //   if currently employed in a company then it will disable the to field.
       current: {
         type: Boolean,
         default: false,
@@ -124,5 +120,4 @@ const ProfileSchema = new mongoose.Schema({
 
 // expreience, education array.
 // socail is object.
-
-module.exports = Profile = mongoose.model('profile', ProfileSchema);
+module.exports = Profile = mongoose.model("profile", ProfileSchema);

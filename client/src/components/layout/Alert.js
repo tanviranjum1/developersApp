@@ -1,28 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import '../../App.css';
-
-// rscp for prop types.
-//
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 // now we have props.alert available to us.
 // map through the alert.
 // make sure not null. output if the array is not empty.
-const Alert = ({ alerts }) => {
-  // returns some jsx
-  return (
-    <div>
-      {alerts !== null &&
-        alerts.length > 0 &&
-        alerts.map((alert) => (
-          <div key={alert.id} className={`alert alert-${alert.alertType}`}>
-            {alert.msg}
-          </div>
-        ))}
+const Alert = ({ alerts }) =>
+  alerts !== null &&
+  alerts.length > 0 &&
+  alerts.map((alert) => (
+    <div key={alert.id} className={`alert alert-${alert.alertType}`}>
+      {alert.msg}
     </div>
-  );
-};
+  ));
 
 Alert.propTypes = {
   alerts: PropTypes.array.isRequired,
@@ -37,4 +27,5 @@ const mapStateToProps = (state) => ({
   alerts: state.alert,
 });
 
+// use connect everytime you call an action or get state.
 export default connect(mapStateToProps)(Alert);
