@@ -1,3 +1,4 @@
-configuration/
+config/
+_resources/
 node_modules/
 /DS_Store

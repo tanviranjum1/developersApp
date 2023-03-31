@@ -2,7 +2,7 @@
 const express = require("express");
 
 // bring the mongodb connection.
-const connectDB = require("./configuration/db");
+const connectDB = require("./config/db");
 
 //initialize app variable with express.
 const app = express();

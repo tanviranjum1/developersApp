@@ -5,9 +5,16 @@ import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
 // destructure and pull out loading also to make sure user is done loading befoer we put the links in.
+// authlinks for authenticated users only.
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
+      <li>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li>
+        <Link to="/posts">Posts</Link>
+      </li>
       <li>
         <Link to="/dashboard">
           {" "}
@@ -27,8 +34,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        {/* #! to make the link go nowhere. */}
-        <a href="#!">Developers</a>
+        <Link to="/profiles">Developers</Link>
       </li>
       <li>
         <Link to="/register">Register</Link>

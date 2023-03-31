@@ -10,6 +10,7 @@ const { check, validationResult } = require("express-validator/check");
 // bring in the models
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Post = require("../../models/Post");
 
 // @route    GET api/profile/me. get our profile only. based on user id that is the token.
 // @desc     Get current users profile
@@ -181,6 +182,7 @@ router.get("/user/:user_id", async (req, res) => {
 router.delete("/", auth, async (req, res) => {
   try {
     // @todo - remove users posts
+    await Post.deleteMany({ user: req.user.id });
 
     // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
